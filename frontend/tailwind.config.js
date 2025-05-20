@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'custom-dark-gradient': '#21303f',
-        'custom-light-gradient': '#4e4e5d'
+        'custom-dark-blue': '#21303f',
+        'custom-darker-blue': '#4e4e5d'
       }
 
     },
