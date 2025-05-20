@@ -1,13 +1,15 @@
-import { ScreenContent } from 'components/ScreenContent';
-import { StatusBar } from 'expo-status-bar';
-
+import { LinearGradient } from 'expo-linear-gradient';
 import './global.css';
 
 export default function App() {
   return (
     <>
-      <ScreenContent title="Home" path="App.tsx"></ScreenContent>
-      <StatusBar style="auto" />
+      <LinearGradient colors={['#4e4e5d', '#21303f']}
+      style={{ flex: 1 }}
+      start={{ x: 0.5, y: 0 }}
+      end={{ x: 0.5, y: 1 }}>
+        
+      </LinearGradient>
     </>
   );
 }
