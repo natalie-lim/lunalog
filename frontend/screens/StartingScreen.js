@@ -30,7 +30,8 @@ export default function StartingScreen() {
         </View>
 
         <View className='items-center'>
-            <TouchableOpacity className='mt-8 bg-white h-16 w-96 justify-center rounded-3xl'>
+            <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}
+            className='mt-8 bg-white h-16 w-96 justify-center rounded-3xl'>
             <Text className='pb-16 text-center font-medium text-3xl text-custom-darker-blue mt-8 tracking-widest'>sign up</Text>
             </TouchableOpacity>
         </View>
