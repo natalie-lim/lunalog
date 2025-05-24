@@ -1,10 +1,21 @@
-import { useNavigation } from "@react-navigation/native";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from "react";
-import { Image, Text, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback, View } from 'react-native';
+import { Image, Keyboard, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
+import DropDownPicker from 'react-native-dropdown-picker';
 import moonImage from '../assets/moon.png';
-import plusImage from '../assets/plus.png'
+import plusImage from '../assets/plus.png';
 import '../global.css';
+
+function SquareButton ({selected, onPress}) {
+  return (
+    <View>
+      <TouchableWithoutFeedback onPress={onPress}>
+        <View className={`h-7 w-7 border-2 rounded-lg ${selected ? 'bg-white' : ''} border-white`}/>
+      </TouchableWithoutFeedback>
+    </View>
+  );
+}
 
 export default function SetGameScreen () {
     const [addSubMin1, setAddSubMin1] = useState(2);
@@ -16,6 +27,22 @@ export default function SetGameScreen () {
     const [addSubMax2, setAddSubMax2] = useState(100)
     const [multDivMin2, setMultDivMin2] = useState(2);
     const [multDivMax2, setMultDivMax2] = useState(100);
+    const [value, setValue] = useState(null);
+    const [open, setOpen] = useState(false);
+
+    const [addEnabled, setAddEnabled] = useState (true);
+    const [subEnabled, setSubEnabled] = useState (true);
+    const [multEnabled, setMultEnabled] = useState (true);
+    const [divEnabled, setDivEnabled] = useState (true);
+
+    const [timeDuration, setTimeDuration] = useState([
+        {label: '30 seconds', value: 30}, 
+        {label: '60 seconds', value: 60},
+        {label: '120 seconds', value: 120},
+        {label: '300 seconds', value: 300},
+        {label: '600 seconds', value: 600},
+
+    ])
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -33,7 +60,7 @@ export default function SetGameScreen () {
                     <Text className='text-center text-2xl font-semibold text-white mt-2 tracking-widest'>Improve your skills</Text>
             
                 {/* set ranges */}
-                <View className="m-4 mt-8">
+                <View className="m-4 mt-5">
                     <Text className=' text-2xl text-white mt-2 font-semibold tracking-widest'>addition/subtraction range:</Text>
                     <View className="flex-row justify-center m-4">
                         <View className="flex-row">
@@ -134,7 +161,75 @@ export default function SetGameScreen () {
                         </View>
                     </View>
                 </View>
-        
+
+                <View className='pt-4 flex-row'>
+
+                    <Text className=' text-2xl text-white mt-2 ml-4 font-semibold tracking-widest'>time limit:       </Text>
+                    <View className='items-end'>
+                        <DropDownPicker
+                            open={open}
+                            value={value}
+                            items={timeDuration}
+                            placeholder="no time limit"
+                            setOpen={setOpen}
+                            setValue={setValue}
+                            setItems={setTimeDuration}
+                            style={{
+                                width: 210,
+                                minHeight: 36, 
+                                borderRadius: 20,
+                                paddingHorizontal: 12,
+                            }}
+                            textStyle={{
+                                textAlign: 'center',
+                                fontSize: 14,
+                            }}
+                            dropDownContainerStyle={{
+                                width: 210,
+                                borderRadius: 15,
+                                marginTop: 4,
+                            }}
+                            />
+                    </View>    
+                </View>
+
+                <View className='pt-4'>
+                    <Text className=' text-2xl text-white mt-2 ml-4 font-semibold tracking-widest'>select operations (min. one):</Text>
+                    <View className='justify-around flex-row mt-4'>
+                        <View className='flex-row'>
+                            <SquareButton selected={addEnabled} onPress = {()=> {setAddEnabled(!addEnabled)}}/>
+                            <Text className='-mt-2 pl-2 text-center text-4xl text-white'>+</Text>
+                        </View>
+                        <View className='flex-row'>
+                            <SquareButton selected={subEnabled} onPress = {()=> {setSubEnabled(!subEnabled)}}/>
+                            <Text className='-mt-2 pl-2 text-center text-4xl text-white'>–</Text>
+                        </View>
+                        <View className='flex-row'>
+                            <SquareButton selected={multEnabled} onPress = {()=> {setMultEnabled(!multEnabled)}}/>
+                            <Text className='-mt-2 pl-2 text-center text-4xl text-white'>×</Text>
+                        </View>
+                        <View className='flex-row'>
+                            <SquareButton selected={divEnabled} onPress = {()=> {setDivEnabled(!divEnabled)}}/>
+                            <Text className='-mt-2 pl-2 text-center text-4xl text-white'>÷</Text>
+                        </View>
+                        
+                    </View>
+                </View>
+
+                <View className='items-center pt-4'>
+                    <TouchableOpacity
+                    className='border-2 border-white opacity-0% h-14 w-96 justify-center rounded-3xl '>
+                    <Text className='pb-16 text-center font-medium text-3xl text-white mt-8 tracking-widest'>start</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <View className='items-center pt-4'>
+                    <TouchableOpacity onPress={() => navigation.navigate('SetGameScreen')}
+                    className='opacity-0% h-14 w-96 justify-center rounded-3xl bg-[#514e5c]'>
+                    <Text className='pb-16 text-center font-medium text-3xl text-white mt-8 tracking-widest'>set as default</Text>
+                    </TouchableOpacity>
+                </View>
+
                 </LinearGradient>
             </View>
         </TouchableWithoutFeedback>

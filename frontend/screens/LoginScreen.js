@@ -49,14 +49,14 @@ export default function LoginScreen() {
         </View>
 
         <View className='items-center'>
-            <TouchableOpacity className='border-2 border-white opacity-0% h-16 w-96 justify-center rounded-3xl '>
+            <TouchableOpacity className='border-2 border-white opacity-0% h-14 w-96 justify-center rounded-3xl '>
             <Text className='pb-16 text-center font-medium text-3xl text-white mt-8 tracking-widest'>login</Text>
             </TouchableOpacity>
         </View>
 
         <View className='items-center'>
             <TouchableOpacity onPress={() => navigation.navigate('StartingScreen')}
-            className='mt-8 opacity-0% h-16 w-96 justify-center rounded-3xl'>
+            className='mt-8 opacity-0% h-14 w-96 justify-center rounded-3xl'>
             <Text className='pb-16 text-center font-medium text-xl text-white mt-8 tracking-widest'>back</Text>
             </TouchableOpacity>
         </View>
