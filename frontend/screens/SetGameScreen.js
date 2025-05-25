@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from "react";
 import { Image, Keyboard, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
@@ -162,39 +161,40 @@ export default function SetGameScreen () {
                     </View>
                 </View>
 
-                <View className='pt-4 flex-row'>
+                <View className='z-50 pt-4 flex-row'>
 
-                    <Text className=' text-2xl text-white mt-2 ml-4 font-semibold tracking-widest'>time limit:       </Text>
-                    <View className='items-end'>
-                        <DropDownPicker
-                            open={open}
-                            value={value}
-                            items={timeDuration}
-                            placeholder="no time limit"
-                            setOpen={setOpen}
-                            setValue={setValue}
-                            setItems={setTimeDuration}
-                            style={{
-                                width: 210,
-                                minHeight: 36, 
-                                borderRadius: 20,
-                                paddingHorizontal: 12,
-                            }}
-                            textStyle={{
-                                textAlign: 'center',
-                                fontSize: 14,
-                            }}
-                            dropDownContainerStyle={{
-                                width: 210,
-                                borderRadius: 15,
-                                marginTop: 4,
-                            }}
-                            />
-                    </View>    
+                    <Text className='text-2xl text-white mt-2 ml-4 font-semibold tracking-widest'>time limit:       </Text>
+    
+                    <DropDownPicker
+                        open={open}
+                        value={value}
+                        items={timeDuration}
+                        placeholder="no time limit"
+                        setOpen={setOpen}
+                        setValue={setValue}
+                        setItems={setTimeDuration}
+                        style={{
+                            width: 210,
+                            minHeight: 36, 
+                            borderRadius: 20,
+                            paddingHorizontal: 12,
+                            zIndex: 1000,
+                        }}
+                        textStyle={{
+                            textAlign: 'center',
+                            fontSize: 14,
+                        }}
+                        dropDownContainerStyle={{
+                            width: 210,
+                            borderRadius: 15,
+                            marginTop: 4,
+                            zIndex: 1000,
+                        }}
+                        />   
                 </View>
 
-                <View className='pt-4'>
-                    <Text className=' text-2xl text-white mt-2 ml-4 font-semibold tracking-widest'>select operations (min. one):</Text>
+                <View className=' pt-4'>
+                    <Text className='text-2xl text-white mt-2 ml-4 font-semibold tracking-widest'>select operations (min. one):</Text>
                     <View className='justify-around flex-row mt-4'>
                         <View className='flex-row'>
                             <SquareButton selected={addEnabled} onPress = {()=> {setAddEnabled(!addEnabled)}}/>
