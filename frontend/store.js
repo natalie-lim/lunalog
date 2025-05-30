@@ -19,7 +19,7 @@ const useStore = create((set) => ({
   divEnabled: true,
 
   // Time limit
-  timeDuration: null,
+  timeDuration: 90,
 
   // Setters
   setAddSubMin1: (val) => set({ addSubMin1: val }),
