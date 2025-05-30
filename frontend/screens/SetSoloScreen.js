@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from "react";
 import { Image, Keyboard, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
@@ -22,42 +23,32 @@ function SquareButton ({selected, onPress}) {
 }
 
 export default function SetSoloScreen () {
+    const navigation = useNavigation();
+
     const addSubMin1 = useStore((state) => state.addSubMin1);
     const setAddSubMin1 = useStore((state) => state.setAddSubMin1);
-
     const addSubMax1 = useStore((state) => state.addSubMax1);
     const setAddSubMax1 = useStore((state) => state.setAddSubMax1);
-
     const multDivMin1 = useStore((state) => state.multDivMin1);
     const setMultDivMin1 = useStore((state) => state.setMultDivMin1);
-
     const multDivMax1 = useStore((state) => state.multDivMax1);
     const setMultDivMax1 = useStore((state) => state.setMultDivMax1);
-
     const addSubMin2 = useStore((state) => state.addSubMin2);
     const setAddSubMin2 = useStore((state) => state.setAddSubMin2);
-
     const addSubMax2 = useStore((state) => state.addSubMax2);
     const setAddSubMax2 = useStore((state) => state.setAddSubMax2);
-
     const multDivMin2 = useStore((state) => state.multDivMin2);
     const setMultDivMin2 = useStore((state) => state.setMultDivMin2);
-
     const multDivMax2 = useStore((state) => state.multDivMax2);
     const setMultDivMax2 = useStore((state) => state.setMultDivMax2);
-
     const timeDuration = useStore((state) => state.timeDuration);
     const setTimeDuration = useStore((state) => state.setTimeDuration);
-
     const addEnabled = useStore((state) => state.addEnabled);
     const setAddEnabled = useStore((state) => state.setAddEnabled);
-
     const subEnabled = useStore((state) => state.subEnabled);
     const setSubEnabled = useStore((state) => state.setSubEnabled);
-
     const multEnabled = useStore((state) => state.multEnabled);
     const setMultEnabled = useStore((state) => state.setMultEnabled);
-
     const divEnabled = useStore((state) => state.divEnabled);
     const setDivEnabled = useStore((state) => state.setDivEnabled);
 
@@ -70,9 +61,7 @@ export default function SetSoloScreen () {
         {label: '120 seconds', value: 120},
         {label: '300 seconds', value: 300},
         {label: '600 seconds', value: 600},
-
     ])
-
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -248,7 +237,7 @@ export default function SetSoloScreen () {
                 </View>
 
                 <View className='items-center pt-4'>
-                    <TouchableOpacity
+                    <TouchableOpacity onPress={() => navigation.navigate('SoloGameScreen')}
                     className='border-2 border-white opacity-0% h-14 w-96 justify-center rounded-3xl '>
                     <Text className='pb-16 text-center font-medium text-3xl text-white mt-8 tracking-widest'>start</Text>
                     </TouchableOpacity>
