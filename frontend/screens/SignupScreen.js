@@ -3,7 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import moonImage from '../assets/moon.png';
-import plusImage from '../assets/plus.png'
+import plusImage from '../assets/plus.png';
 import '../global.css';
 
 
@@ -74,7 +74,7 @@ export default function SignupScreen() {
             </View>
 
             <View className='items-center'>
-                <TouchableOpacity onPress={() => navigation.navigate('SetGameScreen')}
+                <TouchableOpacity onPress={() => navigation.navigate('SetSoloScreen')}
                 className='border-2 border-white opacity-0% h-14 w-96 justify-center rounded-3xl '>
                 <Text className='pb-16 text-center font-medium text-3xl text-white mt-8 tracking-widest'>sign up</Text>
                 </TouchableOpacity>

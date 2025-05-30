@@ -1,10 +1,15 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from "react";
-import { Image, Keyboard, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
+import { Image, Keyboard, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import moonImage from '../assets/moon.png';
 import plusImage from '../assets/plus.png';
+
+import useStore from '../store';
+
 import '../global.css';
+
+
 
 function SquareButton ({selected, onPress}) {
   return (
@@ -16,25 +21,50 @@ function SquareButton ({selected, onPress}) {
   );
 }
 
-export default function SetGameScreen () {
-    const [addSubMin1, setAddSubMin1] = useState(2);
-    const [addSubMax1, setAddSubMax1] = useState(100)
-    const [multDivMin1, setMultDivMin1] = useState(2);
-    const [multDivMax1, setMultDivMax1] = useState(100);
+export default function SetSoloScreen () {
+    const addSubMin1 = useStore((state) => state.addSubMin1);
+    const setAddSubMin1 = useStore((state) => state.setAddSubMin1);
 
-    const [addSubMin2, setAddSubMin2] = useState(2);
-    const [addSubMax2, setAddSubMax2] = useState(100)
-    const [multDivMin2, setMultDivMin2] = useState(2);
-    const [multDivMax2, setMultDivMax2] = useState(100);
-    const [value, setValue] = useState(null);
+    const addSubMax1 = useStore((state) => state.addSubMax1);
+    const setAddSubMax1 = useStore((state) => state.setAddSubMax1);
+
+    const multDivMin1 = useStore((state) => state.multDivMin1);
+    const setMultDivMin1 = useStore((state) => state.setMultDivMin1);
+
+    const multDivMax1 = useStore((state) => state.multDivMax1);
+    const setMultDivMax1 = useStore((state) => state.setMultDivMax1);
+
+    const addSubMin2 = useStore((state) => state.addSubMin2);
+    const setAddSubMin2 = useStore((state) => state.setAddSubMin2);
+
+    const addSubMax2 = useStore((state) => state.addSubMax2);
+    const setAddSubMax2 = useStore((state) => state.setAddSubMax2);
+
+    const multDivMin2 = useStore((state) => state.multDivMin2);
+    const setMultDivMin2 = useStore((state) => state.setMultDivMin2);
+
+    const multDivMax2 = useStore((state) => state.multDivMax2);
+    const setMultDivMax2 = useStore((state) => state.setMultDivMax2);
+
+    const timeDuration = useStore((state) => state.timeDuration);
+    const setTimeDuration = useStore((state) => state.setTimeDuration);
+
+    const addEnabled = useStore((state) => state.addEnabled);
+    const setAddEnabled = useStore((state) => state.setAddEnabled);
+
+    const subEnabled = useStore((state) => state.subEnabled);
+    const setSubEnabled = useStore((state) => state.setSubEnabled);
+
+    const multEnabled = useStore((state) => state.multEnabled);
+    const setMultEnabled = useStore((state) => state.setMultEnabled);
+
+    const divEnabled = useStore((state) => state.divEnabled);
+    const setDivEnabled = useStore((state) => state.setDivEnabled);
+
+    // Keep this local state
     const [open, setOpen] = useState(false);
 
-    const [addEnabled, setAddEnabled] = useState (true);
-    const [subEnabled, setSubEnabled] = useState (true);
-    const [multEnabled, setMultEnabled] = useState (true);
-    const [divEnabled, setDivEnabled] = useState (true);
-
-    const [timeDuration, setTimeDuration] = useState([
+    const [timeOptions, setTimeOptions] = useState([
         {label: '30 seconds', value: 30}, 
         {label: '60 seconds', value: 60},
         {label: '120 seconds', value: 120},
@@ -42,6 +72,7 @@ export default function SetGameScreen () {
         {label: '600 seconds', value: 600},
 
     ])
+
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -167,12 +198,12 @@ export default function SetGameScreen () {
     
                     <DropDownPicker
                         open={open}
-                        value={value}
-                        items={timeDuration}
+                        value={timeDuration}
+                        items={timeOptions}
                         placeholder="no time limit"
                         setOpen={setOpen}
-                        setValue={setValue}
-                        setItems={setTimeDuration}
+                        setValue={setTimeDuration}
+                        setItems={setTimeOptions}
                         style={{
                             width: 210,
                             minHeight: 36, 
