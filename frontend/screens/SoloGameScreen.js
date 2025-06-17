@@ -11,6 +11,7 @@ import useStore from '../store';
 export default function SoloGameScreen () {
     const timeDuration = useStore((state) => state.timeDuration);
     const [time, setTime] = useState(timeDuration);
+    const [answer, setAnswer] = useState();
 
     //change to use zustand for following:
     const asMin = 1;
@@ -25,8 +26,9 @@ export default function SoloGameScreen () {
         let num1 = 0;
         let num2 = 0;
         let soln = 0;
+        let signString = "";
+        console.log ("regenerated");
 
-        console.log(sign);
         if (sign == 1 || sign == 2) {
             const x1 = Math.floor(asMin + (Math.random() * (asMax - asMin)));
             const x2 = Math.floor(asMin + (Math.random() * (asMax - asMin)));
@@ -54,9 +56,25 @@ export default function SoloGameScreen () {
                 soln = x2;
             }
         }
+        //note: for sign, 1 = addition, 2 = subtraction, 3 = multiplication, 4 = division
 
-        return [sign, num1, num2, soln]
+        if (sign == 1) {
+            signString = '+';
+        } else if (sign == 2) {
+            signString = '-';
+        } else if (sign == 3) {
+            signString = 'x';
+        } else {
+            signString = '÷';
+        }
+
+        return [signString, num1, num2, soln]
     }
+
+    const [problem, setProblem] = useState(() => generateProblem());
+    let [sign, num1, num2, soln] = problem;
+    const [input, setInput] = useState("");
+    const [correctCount, setCorrectCount] = useState(0);
     
     useEffect(() => {
         const interval = setInterval(() => {
@@ -81,10 +99,20 @@ export default function SoloGameScreen () {
                 
                 {/* problem input part */}
                 <View className='pt-32 flex-row iterms-center justify-center'>
-                    <Text className='text-center text-4xl font-semibold text-white mt-12'>102 + 5 = </Text>
+                    <Text className='text-center text-4xl font-semibold text-white mt-12'>{num1} {sign} {num2} = </Text>
                     <TextInput 
                         className='pt-2 mt-8 ml-2 w-44 h-16 border-2 border-white text-white text-4xl font-semibold text-center justify-center'
                         keyboardType='numeric'
+                        autoFocus={true}
+                        value={input}
+                        onChangeText={(val) => {
+                            setInput(val);
+                            if (parseInt(val) === soln) {
+                                setProblem(() => generateProblem());
+                                setInput("");
+                                setCorrectCount (correctCount+1);
+                            }
+                        }}
                     >
                     </TextInput>
                 </View>
@@ -92,6 +120,11 @@ export default function SoloGameScreen () {
                 {/* timer */}
                 <View className="flex-row items-center justify-center pt-8">
                     <Text className='text-center text-2xl font-semibold text-white mt-2 tracking-widest'>seconds left: {time}</Text>
+                </View>
+
+                {/* display count */}
+                <View className="flex-row items-center justify-center pt-4">
+                    <Text className='text-center text-2xl font-semibold text-white tracking-widest'>count: {correctCount}</Text>
                 </View>
 
                 </LinearGradient>
