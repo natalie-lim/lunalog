@@ -1,11 +1,14 @@
+
+import useStore from '/Users/christiankim/Desktop/lunalog/frontend/store.js';
+
 //ignore this file, this is just to test logic in console when needed
 console.log("Script started");
 
-    const asMin = 1;
-    const mdMin = 1;
-    //change to use zustand:
-    const asMax = 100 + 1;
-    const mdMax = 20 + 1;
+const asMin = useStore((state) => state.addSubMin1) + useStore((state) => state.addSubMin2);
+const mdMin = useStore((state) => state.multDivMin1) + useStore((state) => state.addSubMin2);
+const asMax = useStore((state) => state.addSubMax1) + useStore((state) => state.addSubMax2) + 1; //keep + 1
+const mdMax = useStore((state) => state.multDivMax1) + useStore((state) => state.multDivMax2) + 1; //keep + 1
+console.log(asMin);
     
     //note: for sign, 1 = addition, 2 = subtraction, 3 = multiplication, 4 = division
     function generateProblem() {

@@ -22,6 +22,26 @@ function SquareButton ({selected, onPress}) {
   );
 }
 
+function renderNumberInput(value, setValue, placeholder = null) {
+    return (
+      <TextInput
+        value={value?.toString() ?? ''}
+        keyboardType="numeric"
+        placeholder={placeholder ?? value?.toString() ?? ''}
+        placeholderTextColor="black"
+        className="text-center w-16 h-8 bg-white rounded-full"
+        onChangeText={(text) => {
+          const num = parseInt(text);
+          if (!isNaN(num)) {
+            setValue(num);
+          } else if (text === '') {
+            setValue(0);
+          }
+        }}
+      />
+    );
+  }
+  
 export default function SetSoloScreen () {
     const navigation = useNavigation();
 
@@ -50,7 +70,7 @@ export default function SetSoloScreen () {
     const multEnabled = useStore((state) => state.multEnabled);
     const setMultEnabled = useStore((state) => state.setMultEnabled);
     const divEnabled = useStore((state) => state.divEnabled);
-    const setDivEnabled = useStore((state) => state.setDivEnabled);
+    const setDivEnabled = useStore((state) => state.setDivEnabled);      
 
     // Keep this local state
     const [open, setOpen] = useState(false);
@@ -83,49 +103,17 @@ export default function SetSoloScreen () {
                     <Text className=' text-2xl text-white mt-2 font-semibold tracking-widest'>addition/subtraction range:</Text>
                     <View className="flex-row justify-center m-4">
                         <View className="flex-row">
-                            <TextInput
-                                placeholder="2"
-                                placeholderTextColor={"black"}
-                                keyboardType="numeric"
-                                className="text-center w-16 h-8 bg-white rounded-full"
-                                value = {addSubMin1}
-                                onChange={setAddSubMin1}
-                                >
-                            </TextInput>
+                            {renderNumberInput(addSubMin1, setAddSubMin1, '2')}
                             <Text className="pl-2 pr-2 font-bold text-3xl text-white">-</Text>
-                            <TextInput
-                                placeholder="100"
-                                placeholderTextColor={"black"}
-                                keyboardType="numeric"
-                                className="text-center w-16 h-8 bg-white rounded-full"
-                                value = {addSubMax1}
-                                onChange={setAddSubMax1}
-                                >
-                            </TextInput>
+                            {renderNumberInput(addSubMax1, setAddSubMax1, '100')}
                         </View>
 
                         <Text className="pl-8 pr-8 font-bold text-3xl text-white">+</Text>
 
                         <View className="flex-row">
-                            <TextInput
-                                placeholder="2"
-                                placeholderTextColor={"black"}
-                                keyboardType="numeric"
-                                className="text-center w-16 h-8 bg-white rounded-full"
-                                value = {addSubMin2}
-                                onChange={setAddSubMin2}
-                                >
-                            </TextInput>
+                            {renderNumberInput(addSubMin2, setAddSubMin2, '2')}
                             <Text className="pl-2 pr-2 font-bold text-3xl text-white">-</Text>
-                            <TextInput
-                                placeholder="100"
-                                placeholderTextColor={"black"}
-                                keyboardType="numeric"
-                                className="text-center w-16 h-8 bg-white rounded-full"
-                                value = {addSubMax2}
-                                onChange={setAddSubMax2}
-                                >
-                            </TextInput>
+                            {renderNumberInput(addSubMax2, setAddSubMax2, '100')}
                         </View>
                     </View>
                 </View>
@@ -134,49 +122,17 @@ export default function SetSoloScreen () {
                     <Text className=' text-2xl text-white mt-2 ml-4 font-semibold tracking-widest'>multiplication/division range:</Text>
                     <View className="flex-row justify-center m-4">
                         <View className="flex-row">
-                            <TextInput
-                                placeholder="2"
-                                placeholderTextColor={"black"}
-                                keyboardType="numeric"
-                                className="text-center w-16 h-8 bg-white rounded-full"
-                                value = {multDivMin1}
-                                onChange={setMultDivMin1}
-                                >
-                            </TextInput>
+                            {renderNumberInput(multDivMin1, setMultDivMin1, '2')}
                             <Text className="pl-2 pr-2 font-bold text-3xl text-white">-</Text>
-                            <TextInput
-                                placeholder="100"
-                                placeholderTextColor={"black"}
-                                keyboardType="numeric"
-                                className="text-center w-16 h-8 bg-white rounded-full"
-                                value = {multDivMax1}
-                                onChange={setMultDivMax1}
-                                >
-                            </TextInput>
+                            {renderNumberInput(multDivMax1, setMultDivMax1, '100')}
                         </View>
 
                         <Text className="pl-7 pr-7 font-bold text-3xl text-white">×</Text>
 
                         <View className="flex-row">
-                            <TextInput
-                                placeholder="2"
-                                placeholderTextColor={"black"}
-                                keyboardType="numeric"
-                                className="text-center w-16 h-8 bg-white rounded-full"
-                                value = {multDivMin2}
-                                onChange={setMultDivMin2}
-                                >
-                            </TextInput>
+                            {renderNumberInput(multDivMin2, setMultDivMin2, '2')}
                             <Text className="pl-2 pr-2 font-bold text-3xl text-white">-</Text>
-                            <TextInput
-                                placeholder="100"
-                                placeholderTextColor={"black"}
-                                keyboardType="numeric"
-                                className="text-center w-16 h-8 bg-white rounded-full"
-                                value = {multDivMax2}
-                                onChange={setMultDivMax2}
-                                >
-                            </TextInput>
+                            {renderNumberInput(multDivMax2, setMultDivMax2, '100')}
                         </View>
                     </View>
                 </View>
@@ -253,5 +209,6 @@ export default function SetSoloScreen () {
                 </LinearGradient>
             </View>
         </TouchableWithoutFeedback>
+
     )
 }

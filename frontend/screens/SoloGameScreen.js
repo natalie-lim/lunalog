@@ -12,17 +12,29 @@ export default function SoloGameScreen () {
     const timeDuration = useStore((state) => state.timeDuration);
     const [time, setTime] = useState(timeDuration);
     const [answer, setAnswer] = useState();
+    
+    const addEnabled = useStore((state) => state.addEnabled);
+    const subEnabled = useStore((state) => state.subEnabled);
+    const multEnabled = useStore((state) => state.multEnabled);
+    const divEnabled = useStore((state) => state.divEnabled);
+
+    const operationOptions = [addEnabled, subEnabled, multEnabled, divEnabled];
+
 
     //change to use zustand for following:
-    const asMin = 1;
-    const mdMin = 1;
-    const asMax = 100 + 1; //keep + 1
-    const mdMax = 20 + 1; //keep + 1
+    const asMin = useStore((state) => state.addSubMin1) + useStore((state) => state.addSubMin2);
+    const mdMin = useStore((state) => state.multDivMin1) + useStore((state) => state.addSubMin2);
+    const asMax = useStore((state) => state.addSubMax1) + useStore((state) => state.addSubMax2); //keep + 1
+    const mdMax = useStore((state) => state.multDivMax1) + useStore((state) => state.multDivMax2); //keep + 1
     
     //note: for sign, 1 = addition, 2 = subtraction, 3 = multiplication, 4 = division
     //note: num1 should always just be displayed first (for division purposes)
+
     function generateProblem() {
-        const sign = Math.floor(1 + (Math.random() * (4)));
+        let sign = Math.floor(1 + Math.random() * 4);
+        while (!operationOptions[sign - 1]) {
+            sign = Math.floor(1 + Math.random() * 4);
+        }
         let num1 = 0;
         let num2 = 0;
         let soln = 0;

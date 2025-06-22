@@ -22,22 +22,22 @@ const useStore = create((set) => ({
   timeDuration: 90,
 
   // Setters
-  setAddSubMin1: (val) => set({ addSubMin1: val }),
-  setAddSubMax1: (val) => set({ addSubMax1: val }),
-  setAddSubMin2: (val) => set({ addSubMin2: val }),
-  setAddSubMax2: (val) => set({ addSubMax2: val }),
+  setAddSubMin1: (val) => set((state) => ({ ...state, addSubMin1: val })),
+  setAddSubMax1: (val) => set((state) => ({ ...state, addSubMax1: val })),
+  setAddSubMin2: (val) => set((state) => ({ ...state, addSubMin2: val })),
+  setAddSubMax2: (val) => set((state) => ({ ...state, addSubMax2: val })),
 
-  setMultDivMin1: (val) => set({ multDivMin1: val }),
-  setMultDivMax1: (val) => set({ multDivMax1: val }),
-  setMultDivMin2: (val) => set({ multDivMin2: val }),
-  setMultDivMax2: (val) => set({ multDivMax2: val }),
+  setMultDivMin1: (val) => set((state) => ({ ...state, multDivMin1: val })),
+  setMultDivMax1: (val) => set((state) => ({ ...state, multDivMax1: val })),
+  setMultDivMin2: (val) => set((state) => ({ ...state, multDivMin2: val })),
+  setMultDivMax2: (val) => set((state) => ({ ...state, multDivMax2: val })),
 
-  setAddEnabled: (val) => set({ addEnabled: val }),
-  setSubEnabled: (val) => set({ subEnabled: val }),
-  setMultEnabled: (val) => set({ multEnabled: val }),
-  setDivEnabled: (val) => set({ divEnabled: val }),
+  setAddEnabled: (val) => set((state) => ({ ...state, addEnabled: val })),
+  setSubEnabled: (val) => set((state) => ({ ...state, subEnabled: val })),
+  setMultEnabled: (val) => set((state) => ({ ...state, multEnabled: val })),
+  setDivEnabled: (val) => set((state) => ({ ...state, divEnabled: val })),
 
-  setTimeDuration: (val) => set({ timeDuration: val })
+  setTimeDuration: (val) => set((state) => ({ ...state, timeDuration: val })),
 }));
 
 export default useStore;
